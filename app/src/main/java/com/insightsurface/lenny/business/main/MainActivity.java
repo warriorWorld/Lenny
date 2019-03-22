@@ -40,6 +40,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private TextToSpeech tts;
     private int dbThreshold = 5;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -174,7 +175,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                 silentCount = 0;
                 return;
             }
-            if (db < 5) {
+            if (db < dbThreshold) {
                 silentCount++;
             } else {
                 silentCount = 0;
