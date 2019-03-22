@@ -7,9 +7,11 @@ import android.os.Handler;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.insightsurface.lenny.R;
@@ -24,6 +26,7 @@ import java.util.Random;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener, TextToSpeech.OnInitListener {
     private TextView stateTv, conversationTv;
+    private EditText dbEt;
     private Button startBtn, stopBtn;
     private final String TAG = "RecordManager";
     private MediaRecorder mMediaRecorder;
@@ -35,6 +38,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private int db;
     private String conversationContent = "";
     private TextToSpeech tts;
+    private int dbThreshold = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +64,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private void initUI() {
         stateTv = (TextView) findViewById(R.id.state_tv);
         conversationTv = findViewById(R.id.conversation_tv);
+        dbEt = findViewById(R.id.db_et);
         startBtn = findViewById(R.id.start_btn);
         stopBtn = findViewById(R.id.stop_btn);
         stopBtn.setOnClickListener(this);
@@ -146,7 +151,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private int BASE = 600;
     private int SPACE = 200;// 间隔取样时间
     private int silentCount = 0;
-    private int replyThreshold = 7;
+    private int replyThreshold = 12;
     private int replyCount = 0;
 
     private void updateMicStatus() {
@@ -249,6 +254,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.start_btn:
+                if (TextUtils.isEmpty(dbEt.getText())) {
+                    dbThreshold = Integer.valueOf(dbEt.getText().toString());
+                }
                 startRecord();
                 break;
             case R.id.stop_btn:
