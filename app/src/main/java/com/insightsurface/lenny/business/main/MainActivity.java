@@ -119,6 +119,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             return 0L;
         recording = false;
         replyCount = 0;
+        tts.stop();
         endTime = System.currentTimeMillis();
         Log.i("ACTION_END", "endTime" + endTime);
         mMediaRecorder.stop();
@@ -164,6 +165,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                 }
             });
             if (tts.isSpeaking()) {
+                mHandler.postDelayed(mUpdateMicStatusTimer, SPACE);
+                silentCount = 0;
                 return;
             }
             if (db < 5) {
