@@ -5,7 +5,6 @@ import android.media.MediaRecorder;
 import android.os.Environment;
 import android.os.Handler;
 import android.speech.tts.TextToSpeech;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -24,7 +23,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Random;
 
-public class MainActivity extends BaseActivity implements View.OnClickListener, TextToSpeech.OnInitListener {
+public class LennyActivity extends BaseActivity implements View.OnClickListener, TextToSpeech.OnInitListener {
     private TextView stateTv, conversationTv;
     private EditText dbEt;
     private Button startBtn, stopBtn;
@@ -44,7 +43,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_lenny);
         file = new File(Environment
                 .getExternalStorageDirectory().getAbsolutePath() + "/Lenny/record.3gp");
         if (!file.exists()) {

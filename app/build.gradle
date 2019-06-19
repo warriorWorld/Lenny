@@ -10,6 +10,14 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+    signingConfigs {
+        debug {
+            storeFile file('newkeystore.jks')
+            storePassword "123456"
+            keyAlias "hangsu"
+            keyPassword "123456"
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
